@@ -13,6 +13,9 @@
       (:body response) => "Hello World")))
 
 (facts "On a call to a invalid route"
-  (fact "the response status should be 404"
-    (let [response (app (mock/request :get "/invalid"))]
-      (:status response) => 404)))
+  (let [response (app (mock/request :get "/invalid"))]
+    (fact "the response status should be 404"
+      (:status response) => 404)
+      
+    (fact "the return body should be 'The resource does not exist'"
+      (:body response) => "The resource does not exist!")))

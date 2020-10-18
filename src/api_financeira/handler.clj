@@ -5,7 +5,7 @@
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
-  (route/not-found "Not Found"))
+  (route/not-found "The resource does not exist!"))
 
 (def app
   (wrap-defaults app-routes site-defaults))
