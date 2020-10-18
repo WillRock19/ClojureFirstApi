@@ -5,12 +5,11 @@
 
 
 (facts "On a call to the root route"
-  (fact "the response status should be 200"
-    (let [response (app (mock/request :get "/"))]
-      (:status response) => 200))
+  (let [response (app (mock/request :get "/"))]
+    (fact "the response status should be 200"
+      (:status response) => 200)
       
-  (fact "the return body should be 'Hello World'"
-    (let [response (app (mock/request :get "/"))]
+    (fact "the return body should be 'Hello World'"
       (:body response) => "Hello World")))
 
 (facts "On a call to a invalid route"
