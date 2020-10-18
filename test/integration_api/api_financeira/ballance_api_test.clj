@@ -5,6 +5,7 @@
                 [clj-http.client :as http]))
 
 (def server (atom nil))
+(def server-port 3001)
 
 (defn start-server [port]
   (swap! server (fn [_] (run-jetty app {:port port :join? false}))))
@@ -12,13 +13,8 @@
 (defn stop-server []
   (.stop @server))
 
-(fact "O saldo inicial é zero" :acceptance
-  (let [server-port 3001
-        request-url (format "http://localhost:%s/ballance" server-port)]
-
-    (start-server 3001)
-
-    ;; Make an HTTP request and verify that the return body has the value 0
-    (:body (http/get request-url)) => "0"
-
-    (stop-server)))
+(against-background [(before :facts (start-server server-port))
+                     (after  :facts (stop-server))]
+  (fact "O saldo inicial é zero" :acceptance
+    (let [request-url (format "http://localhost:%s/ballance" server-port)]
+      (:body (http/get request-url)) => "0")))
