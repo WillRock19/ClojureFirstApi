@@ -12,7 +12,7 @@
 (defn stop-server []
   (.stop @server))
 
-(fact "O saldo inicial é zero"
+(fact "O saldo inicial é zero" :acceptance
   (let [server-port 3001
         request-url (format "http://localhost:%s/ballance" server-port)]
 
