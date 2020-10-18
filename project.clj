@@ -15,4 +15,5 @@
                         [ring/ring-mock "0.3.2"]
                         [ring/ring-core "1.7.1"]
                         [ring/ring-jetty-adapter "1.7.1"]
-                        [midje "1.9.6"]]}})
+                        [midje "1.9.6"]]}}
+  :test-paths ["test/unit" "test/integration_api"])
