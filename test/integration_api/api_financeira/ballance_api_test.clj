@@ -3,7 +3,7 @@
                 [cheshire.core :as json]
                 [midje.sweet :refer :all]))
 
-(against-background [(before :facts (start-server server-port))
+(against-background [(before :facts (start-server))
                      (after  :facts (stop-server))]
   (fact "The initial ballance is zero" :acceptance
     (json/parse-string (content-of-request "/ballance") true) => {:saldo 0}))

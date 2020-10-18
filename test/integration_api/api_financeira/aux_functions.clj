@@ -11,8 +11,11 @@
   
 (def ^:private request-for (comp http/get url-for))
 
-(defn start-server [port]
-  (swap! server (fn [_] (run-jetty app {:port port :join? false}))))
+(defn start-server 
+([] 
+  (start-server server-port))
+([port]
+  (swap! server (fn [_] (run-jetty app {:port port :join? false})))))
 
 (defn stop-server []
   (.stop @server))
