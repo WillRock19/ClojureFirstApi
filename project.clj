@@ -6,7 +6,8 @@
                  [compojure "1.6.1"]
                  [ring/ring-defaults "0.3.2"]]
   :plugins [[lein-ring "0.12.5"]
-            [lein-midje "3.2.2"]]
+            [lein-midje "3.2.2"]
+            [lein-cloverage "1.0.13"]]
   :ring {:handler api-financeira.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
