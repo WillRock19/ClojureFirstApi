@@ -12,10 +12,18 @@
     (fact "the return body should be 'Hello World'"
       (:body response) => "Hello World")))
 
-(facts "On a call to a invalid route"
+(facts "On a call to an invalid route"
   (let [response (app (mock/request :get "/invalid"))]
     (fact "the response status should be 404"
       (:status response) => 404)
       
     (fact "the return body should be 'The resource does not exist'"
       (:body response) => "The resource does not exist!")))
+
+(facts "On a cakk to the ballance route"
+  (let [response (app (mock/request :get "/ballance"))]
+    (fact "the response status should be 200"
+      (:status response) => 200)
+    
+    (fact "the return body should be '0'"
+      (:body response) => "0")))

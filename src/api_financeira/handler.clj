@@ -5,6 +5,7 @@
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
+  (GET "/ballance" [] "0")
   (route/not-found "The resource does not exist!"))
 
 (def app
