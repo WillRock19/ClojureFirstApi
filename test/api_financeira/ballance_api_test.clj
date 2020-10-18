@@ -1,7 +1,8 @@
 (ns api-financeira.ballance-api-test
     (:require   [api-financeira.handler :refer [app]]
                 [midje.sweet :refer :all]
-                [ring.adapter.jetty :refer [run-jetty]]))
+                [ring.adapter.jetty :refer [run-jetty]]
+                [clj-http.client :as http]))
 
 (def server (atom nil))
 
@@ -11,6 +12,13 @@
 (defn stop-server []
   (.stop @server))
 
-(fact "Inicia e para o servidor"
-    (start-server 3000)
-    (stop-server))
+(fact "O saldo inicial é zero"
+  (let [server-port 3001
+        request-url (format "http://localhost:%s/ballance" server-port)]
+
+    (start-server 3001)
+
+    ;; Make an HTTP request and verify that the return body has the value 0
+    (:body (http/get request-url)) => "0"
+
+    (stop-server)))
