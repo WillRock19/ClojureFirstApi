@@ -6,4 +6,4 @@
 (against-background [(before :facts (start-server server-port))
                      (after  :facts (stop-server))]
   (fact "The initial ballance is zero" :acceptance
-    (json/parse-string (content-of-request "/ballance")) => {"saldo" 0}))
+    (json/parse-string (content-of-request "/ballance") true) => {:saldo 0}))
