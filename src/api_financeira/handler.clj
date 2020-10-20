@@ -4,9 +4,14 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
+(defn- content-as-json 
+  [content]
+  {:headers {"Content-Type" "application/json; charset=utf-8"}
+   :body content})
+
 (defroutes app-routes
   (GET "/" [] "Hello World")
-  (GET "/ballance" [] (json/generate-string { :saldo 0 }))
+  (GET "/ballance" [] (content-as-json (json/generate-string { :saldo 0 })))
   (route/not-found "The resource does not exist!"))
 
 (def app
