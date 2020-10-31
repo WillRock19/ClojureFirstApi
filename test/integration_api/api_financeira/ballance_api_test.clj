@@ -14,7 +14,7 @@
     (json/parse-string (content-of-request "/ballance") true) => {:saldo 0})
 
 
-  (fact "The ballance will be 10 when the only transaction is a revenue of 10" :acceptance
+  (fact "The ballance will be 10 after I register a transaction with that value" :acceptance
     (http/post (url-for "/transaction")
                (convert-to-json-request {:valor 10 :tipo "receita"}))
 
