@@ -16,14 +16,11 @@
 (defn clean-registers []
   (reset! my-registers []))
 
-(defn calculate-ballance
-  [transactions, accumulated-value]
-  (if (empty? transactions)
-    accumulated-value
-    (let [first-transaction (first transactions)]
-        (if (despesa? first-transaction)
-            (calculate-ballance (rest transactions) (- accumulated-value (:valor first-transaction)))
-            (calculate-ballance (rest transactions) (+ accumulated-value (:valor first-transaction)))))))
+(defn map-numbers-with-sign
+      [transaction]
+      (if (despesa? transaction)
+        (unchecked-negate (:valor transaction))
+        (:valor transaction)))
 
 (defn balance []
-  (calculate-ballance (transactions) 0))
+  (reduce + (map map-numbers-with-sign (transactions))))
