@@ -12,6 +12,7 @@
 (defroutes app-routes
   (GET "/" [] "Hello World")
   (GET "/ballance" [] (content-as-json (json/generate-string { :saldo 0 })))
+  (POST "/transaction" [] {})
   (route/not-found "The resource does not exist!"))
 
 (def app
