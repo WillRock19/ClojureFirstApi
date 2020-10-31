@@ -15,7 +15,7 @@
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
-  (GET "/ballance" [] (content-as-json {:saldo (db/balance) }))
+  (GET "/balance" [] (content-as-json {:saldo (db/balance) }))
   (POST "/transaction" my-request (->
                                     (db/register (:body my-request))
                                     (content-as-json 201)))

@@ -21,11 +21,11 @@
     (fact "the return body should be 'The resource does not exist'"
       (:body response) => "The resource does not exist!")))
 
-(facts "On a call to the ballance route"
+(facts "On a call to the balance route"
   (against-background (json/generate-string {:saldo 0}) => "{\"saldo\": 0}"
                       (db/balance) => 0)
 
-  (let [response (app (mock/request :get "/ballance"))]
+  (let [response (app (mock/request :get "/balance"))]
     (fact "the response status should be 200"
       (:status response) => 200)
     
