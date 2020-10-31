@@ -19,4 +19,4 @@
 
 (def app (->
            (wrap-defaults app-routes api-defaults)
-           (wrap-json-body)))
+           (wrap-json-body { :keywords? true :bigdecimals? true })))
