@@ -4,6 +4,13 @@
   [transacao]
   (= (:tipo transacao) "despesa"))
 
+(defn ^:private calculate-balance
+  [total-amount, transaction]
+  (let [current-value (:valor transaction)]
+    (if (despesa? transaction)
+      (- total-amount current-value)
+      (+ total-amount current-value))))
+
 (def my-registers (atom []))
 
 (defn transactions []
@@ -15,13 +22,6 @@
 
 (defn clean-registers []
   (reset! my-registers []))
-
-(defn calculate-balance
-  [total-amount, transaction]
-  (let [current-value (:valor transaction)]
-    (if (despesa? transaction)
-      (- total-amount current-value)
-      (+ total-amount current-value))))
 
 (defn balance []
   (reduce calculate-balance 0 (transactions)))
