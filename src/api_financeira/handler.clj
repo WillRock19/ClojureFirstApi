@@ -2,7 +2,7 @@
   (:require [cheshire.core :as json]
             [compojure.core :refer :all]
             [compojure.route :as route]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]))
 
 (defn- content-as-json 
   [content]
@@ -15,4 +15,4 @@
   (route/not-found "The resource does not exist!"))
 
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (wrap-defaults app-routes api-defaults))

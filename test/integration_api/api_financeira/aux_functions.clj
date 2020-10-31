@@ -6,9 +6,9 @@
 (def ^:private server (atom nil))
 (def ^:private server-port 3001)
 
-(defn ^:private url-for [route]
-    (format "http://localhost:%s/%s" server-port route))
-  
+(defn url-for [route]
+      (format "http://localhost:%s/%s" server-port route))
+
 (def ^:private request-for (comp http/get url-for))
 
 (defn start-server 
