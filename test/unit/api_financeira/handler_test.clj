@@ -22,7 +22,8 @@
       (:body response) => "The resource does not exist!")))
 
 (facts "On a call to the ballance route"
-  (against-background (json/generate-string {:saldo 0}) => "{\"saldo\": 0}")
+  (against-background (json/generate-string {:saldo 0}) => "{\"saldo\": 0}"
+                      (db/balance) => 0)
 
   (let [response (app (mock/request :get "/ballance"))]
     (fact "the response status should be 200"
