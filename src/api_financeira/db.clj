@@ -16,11 +16,12 @@
 (defn clean-registers []
   (reset! my-registers []))
 
-(defn map-numbers-with-sign
-      [transaction]
-      (if (despesa? transaction)
-        (unchecked-negate (:valor transaction))
-        (:valor transaction)))
+(defn calculate-balance
+  [total-amount, transaction]
+  (let [current-value (:valor transaction)]
+    (if (despesa? transaction)
+      (- total-amount current-value)
+      (+ total-amount current-value))))
 
 (defn balance []
-  (reduce + (map map-numbers-with-sign (transactions))))
+  (reduce calculate-balance 0 (transactions)))
