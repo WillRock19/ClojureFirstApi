@@ -3,6 +3,7 @@
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [ring.middleware.json :refer [wrap-json-body]]
             [api-financeira.db :as db]))
 
 (defn- content-as-json 
@@ -16,5 +17,6 @@
   (POST "/transaction" my-request (db/register (:body my-request)))
   (route/not-found "The resource does not exist!"))
 
-(def app
-  (wrap-defaults app-routes api-defaults))
+(def app (->
+           (wrap-defaults app-routes api-defaults)
+           (wrap-json-body)))
