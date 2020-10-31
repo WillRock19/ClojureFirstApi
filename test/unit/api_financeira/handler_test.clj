@@ -43,4 +43,4 @@
       (:status response) => 201)
 
     (fact "the return body should be a JSON with the sent content and an id"
-      (:body response) => "{\"id\": 1,\"valor\":10,\"tipo\":\"receita\"}")))
+      (:body response) => "{\"id\":1,\"valor\":10,\"tipo\":\"receita\"}")))

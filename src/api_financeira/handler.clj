@@ -6,15 +6,19 @@
             [ring.middleware.json :refer [wrap-json-body]]
             [api-financeira.db :as db]))
 
-(defn- content-as-json 
-  [content]
-  {:headers {"Content-Type" "application/json; charset=utf-8"}
-   :body content})
+(defn ^:private content-as-json
+  ([content] (content-as-json content nil))
+  ([content status]
+     {:status  (or status 200)
+      :headers {"Content-Type" "application/json; charset=utf-8"}
+      :body    (json/generate-string content)}))
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
-  (GET "/ballance" [] (content-as-json (json/generate-string { :saldo 0 })))
-  (POST "/transaction" my-request (db/register (:body my-request)))
+  (GET "/ballance" [] (content-as-json {:saldo 0 }))
+  (POST "/transaction" my-request (->
+                                    (db/register (:body my-request))
+                                    (content-as-json 201)))
   (route/not-found "The resource does not exist!"))
 
 (def app (->
