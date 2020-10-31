@@ -1,3 +1,4 @@
 (ns api-financeira.db)
 
-(declare register)
+(defn register [transaction]
+  transaction)
